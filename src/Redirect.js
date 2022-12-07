@@ -8,16 +8,17 @@ export default function Redirect({res}) {
     return <div>Loading</div>;
   }
   else{
-  console.log("Url is ", res.data.data.redirect.url);
+    const redirect = res.data.value.paymentDetail.data.redirect;
+    console.log("Url is ", redirect.url);
 
     return (
       <div>
-        <form method='post' action={res.data.data.redirect.url}>
-         {res.data.data.redirect.parameters.map(({name,value}) => {
-           return <input type="hidden" name={name} value={value} />
-         })}
-         <button type="submit">GO</button>
-       </form>
+        <form method="post" action={redirect.url}>
+          {redirect.parameters.map(({ name, value }) => {
+            return <input type="hidden" name={name} value={value} />;
+          })}
+          <button type="submit">GO</button>
+        </form>
       </div>
     );
   }
